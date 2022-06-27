@@ -13,3 +13,5 @@ mix ecto.create
 mix ecto.migrate
 mix phx.server
 ```
+
+This will run the server, to see the front end demo go to the [front end repo](https://github.com/gaslight/livestate-comments) and follow instructions there.
