@@ -49,7 +49,7 @@ defmodule LiveStateComments.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:live_state, path: "../live_state"}
+      {:live_state, git: "git@github.com:gaslight/live_state.git"}
     ]
   end
 
