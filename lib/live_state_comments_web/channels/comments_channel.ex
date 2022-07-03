@@ -1,8 +1,9 @@
 defmodule LiveStateCommentsWeb.CommentsChannel do
-  use LiveState.LiveStateChannel, web_module: LiveStateCommentsWeb
+  use LiveState.Channel, web_module: LiveStateCommentsWeb
 
   alias LiveStateComments.Repo
   alias LiveStateComments.Comments
+  alias LiveState.Event
 
   @impl true
   def state_key, do: "state"
@@ -17,7 +18,7 @@ defmodule LiveStateCommentsWeb.CommentsChannel do
   def handle_event("add_comment", comment_params, %{comments: comments}) do
     case Comments.create_comment(comment_params) do
       {:ok, comment} ->
-        {:reply, [%{name: "comment_added", payload: comment}], %{comments: comments ++ [comment]}}
+        {:reply, [%Event{name: "comment_added", detail: comment}], %{comments: comments ++ [comment]}}
     end
   end
 
