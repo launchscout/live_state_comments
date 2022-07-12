@@ -13,6 +13,7 @@ config :live_state_comments,
 # Configures the endpoint
 config :live_state_comments, LiveStateCommentsWeb.Endpoint,
   url: [host: "localhost"],
+  check_origin: false,
   render_errors: [view: LiveStateCommentsWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: LiveStateComments.PubSub,
   live_view: [signing_salt: "AjlsnhjK"]
