@@ -17,8 +17,8 @@ defmodule LiveStateComments.Comments do
       [%Comment{}, ...]
 
   """
-  def list_comments do
-    Repo.all(Comment)
+  def list_comments(url) do
+    (from c in Comment, where: c.url == ^url) |> Repo.all()
   end
 
   @doc """
@@ -57,7 +57,7 @@ defmodule LiveStateComments.Comments do
       {:ok, comment} ->
         Phoenix.PubSub.broadcast(
           LiveStateComments.PubSub,
-          "comments",
+          "comments:#{comment.url}",
           {:comment_created, comment}
         )
 
