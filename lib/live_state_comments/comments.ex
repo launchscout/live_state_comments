@@ -6,7 +6,8 @@ defmodule LiveStateComments.Comments do
   import Ecto.Query, warn: false
   alias LiveStateComments.Repo
 
-  alias LiveStateComments.Comments.Comment
+  alias LiveStateComments.Comments.{Comment, CommentEmail}
+  alias LiveStateComments.Mailer
 
   @doc """
   Returns the list of comments.
@@ -60,7 +61,7 @@ defmodule LiveStateComments.Comments do
           "comments:#{comment.url}",
           {:comment_created, comment}
         )
-
+        comment |> CommentEmail.comment_added() |> Mailer.deliver() |> IO.inspect()
         {:ok, comment}
 
       {:error, changeset} ->
