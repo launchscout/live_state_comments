@@ -19,7 +19,7 @@ defmodule LiveStateComments.Comments do
 
   """
   def list_comments(url) do
-    (from c in Comment, where: c.url == ^url) |> Repo.all()
+    from(c in Comment, where: c.url == ^url, order_by: {:desc, c.inserted_at}) |> Repo.all()
   end
 
   @doc """
@@ -61,6 +61,7 @@ defmodule LiveStateComments.Comments do
           "comments:#{comment.url}",
           {:comment_created, comment}
         )
+
         comment |> CommentEmail.comment_added() |> Mailer.deliver() |> IO.inspect()
         {:ok, comment}
 
