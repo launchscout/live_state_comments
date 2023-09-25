@@ -32,3 +32,5 @@ live_state_comments-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.env
+
